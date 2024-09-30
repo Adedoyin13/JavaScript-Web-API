@@ -44,13 +44,95 @@ function myDisplayer(some) {
     return myCallback(sum); 
   }
   
-  const result = myCalculator(5, 5, myDisplayer);
-  const result2 = myCalculator(5, 5, myFormatter);
-  console.log(result);
-  console.log(result2);
+const result = myCalculator(5, 5, myDisplayer);
+const result2 = myCalculator(5, 5, myFormatter);
+console.log(result);
+console.log(result2);
 
 
 
+function performTask (taskName, callback) {
+  console.log(`Starting task: ${taskName}`);
+
+  console.log('Loading...');
+
+  setTimeout(() => {
+    console.log(`Finished task: ${taskName}`);
+    callback();
+  }, 2000)
+}
+
+function taskCompleted () {
+  console.log('Task is complete');
+}
+performTask('Download completed', taskCompleted)
+
+
+// Fetching a data from an API - Application programming Language
+
+
+api = [
+  {
+    name : 'Mubarak',
+    language : 'Birum'
+  },
+  {
+    name : 'Chapo',
+    language : 'Okun'
+  },
+  {
+    name : 'OG',
+    language : 'Yoruba'
+  },
+  {
+    name : 'Anate',
+    language : 'Ebira'
+  }
+]
+
+function fetchData (callback) {
+  // console.log('Loading...');
+  setTimeout(() => {
+    console.log(`data fetched successfully`);
+    const data = api.find(person => person.name === 'Anate')
+    callback(data)
+  }, 2000)
+}
+
+function dataFetched (data) {
+  console.log(data);
+}
+
+fetchData(dataFetched)
+
+
+// PROMISE ==> A modern way to handle asynchronous operations. Represention the eventual completion or failure of an asychronous operation and its resulting value.
+
+function fetchCohort () {
+  return new Promise ((resolve, reject) => {
+
+    // Simulate the data fatching
+
+    setTimeout(() => {
+      const success = true;
+      if (success) {
+        const data = api.find(person => person.name === 'Chapo')
+        resolve(data)
+      } else {
+        reject(new Error('Failed to get the data'));
+      }
+    }, 5000)
+  })
+}
+
+
+// Using the fatchCohort function with promise
+
+fetchCohort().then((data) => {
+  console.log(data.language);
+}).catch((error) => {
+  console.error('Name does not exist');
+})
 
 
 
