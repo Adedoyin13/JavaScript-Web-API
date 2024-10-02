@@ -106,7 +106,7 @@ function dataFetched (data) {
 fetchData(dataFetched)
 
 
-// PROMISE ==> A modern way to handle asynchronous operations. Represention the eventual completion or failure of an asychronous operation and its resulting value.
+// PROMISE ==> A modern way to handle asynchronous operations. Representing the eventual completion or failure of an asychronous operation and its resulting value.
 
 function fetchCohort () {
   return new Promise ((resolve, reject) => {
@@ -131,9 +131,59 @@ function fetchCohort () {
 fetchCohort().then((data) => {
   console.log(data.language);
 }).catch((error) => {
-  console.error('Name does not exist');
+  console.error('Name does not exist', error);
 })
 
 
+// ASYNC & AWAIT ==> are used to simplify handling asynchronous operations using promises
+
+async function myFunction() {
+  const text = 'Hello World!'
+  return text
+}
+
+console.log(myFunction());
+
+const fetchInfo = async () => {
+  let y = await 'OG is an OG';
+  console.log(y);
+}
+
+fetchInfo()
+console.log(1);
+console.log(2);
+console.log(3);
+
+
+function operaMethod () {
+  let firstPromise = new Promise ((resolve) => resolve('Hello'));
+  let secondPromise = new Promise ((resolve) => {
+    setTimeout(() => {
+      resolve('GeeksForGeeks...')
+    }, 10000)
+  })
+  let combinedPromise = Promise.all([firstPromise, secondPromise])
+  return combinedPromise
+}
+
+async function display() {
+  let data = await operaMethod();
+  console.log(data);
+}
+
+display()
+
+
+const fetchApi = async () => {
+  try {
+    let response = await fetch ('https://jsonplaceholder.typicode.com/users');
+    let data = await response.json()
+    return data;
+  } catch(error) {
+    console.error('Failed to fetch', error)
+  }
+}
+
+fetchApi().then((result) => console.log(result));
 
 
